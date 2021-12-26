@@ -7,12 +7,13 @@ services:
 
 before_install:
   - echo "start creating an image with dockerfile"
-  - docker build -t guk0/docker-react-app -f Dockerfile.dev .
+  - docker build -t guk0/docker-react-app -f Dockerfile .
 
 script:
   - docker run -e CI=true guk0/docker-react-app npm run test -- --coverage
 
 deploy: 
+  edge: true
   provider: elasticbeanstalk
   region: "ap-northeast-2"
   app: "docker-react-app"
